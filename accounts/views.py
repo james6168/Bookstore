@@ -4,6 +4,7 @@ from accounts.serializers import RegisterSerializer, LoginSerializer
 from rest_framework.response import Response
 from rest_framework.status import *
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.views.generic import TemplateView
 
 User = get_user_model()
 
@@ -20,6 +21,11 @@ class RegisterAPIView(APIView):
 
 class LoginAPIView(TokenObtainPairView):
     serializer_class = LoginSerializer
+
+
+class LoginView(TemplateView):
+    template_name = "login.html"
+
 
 
 
