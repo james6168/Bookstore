@@ -5,11 +5,14 @@ from rest_framework.response import Response
 from rest_framework.status import *
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.views.generic import TemplateView
+from rest_framework.permissions import AllowAny
 
 User = get_user_model()
 
 
 class RegisterAPIView(APIView):
+
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
@@ -25,6 +28,10 @@ class LoginAPIView(TokenObtainPairView):
 
 class LoginView(TemplateView):
     template_name = "login.html"
+
+
+class RegisterView(TemplateView):
+    template_name = "register.html"
 
 
 
