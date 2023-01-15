@@ -2,6 +2,8 @@ $(document).ready(function() {
     console.log('ready')
 })
 
+
+
 $('#register_button').click(
     function () {
         var email = $('#email').val()
