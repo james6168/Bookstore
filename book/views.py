@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import *
+from rest_framework.response import Response
 from book.permissions import IsAuthorOrReadOnly
 from book.serializers import BookSerializer
 from book.models import Book
@@ -12,6 +13,16 @@ class BookListAPIView(ListAPIView):
     pagination_class = BookListPagination
     serializer_class = BookSerializer
     queryset = Book.objects.all()
+
+
+class BookDetailAPIView(GenericAPIView):
+    permission_classes = [IsAuthorOrReadOnly, ]
+    serializer_class = BookSerializer
+
+    def get(self, request):
+        book_id = request.GET.get("id")
+        serializer = BookSerializer(Book.objects.get(id=book_id))
+        return Response(serializer.data)
 
 
 class BookList(TemplateView):
