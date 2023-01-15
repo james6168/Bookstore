@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginView.as_view(), name='login'),
     path('register/', RegisterView.as_view(), name='register'),
+    path('<int:page_order>/', BookList.as_view()),
     path('', BookList.as_view()),
     path('api/v1/accounts/', include('accounts.urls')),
     path('api/v1/book/', include('book.urls')),
