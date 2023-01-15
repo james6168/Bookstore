@@ -463,3 +463,16 @@ button {
   display: inline-block;
   margin: 10px;
 }
+
+.card-body h5 {
+  height: 50px;
+  width: 100%;
+}
+
+.card img {
+  height: 286px;
+}
+
+.card-text {
+  height: 96px;
+}

@@ -9,7 +9,7 @@ $(document).ready(function () {
             bookList = response
             for (i = 0; i < bookList.length; i++) {
                 bookName = bookList[i].name
-                bookDescription = bookList[i].description
+                bookDescription = bookList[i].description.substring(0, 100) + "..."
                 bookImage = bookList[i].images[0].book_image
                 bookContainer.append(`<div class="card" style="width: 18rem;">
                 <img src="${bookImage}" class="card-img-top" alt="..." />
