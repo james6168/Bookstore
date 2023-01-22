@@ -33,6 +33,7 @@ $(document).ready(function () {
                 bookList = response.results
 
                 for (i = 0; i < bookList.length; i++) {
+                    bookId = bookList[i].id
                     bookName = bookList[i].name
                     bookDescription = bookList[i].description.substring(0, 100) + "..."
                     bookImage = bookList[i].images[0].book_image
@@ -45,7 +46,7 @@ $(document).ready(function () {
                                 <p class="card-text">
                                     ${bookDescription}
                                 </p>
-                                <a href="#" class="btn btn-primary">To book details</a>
+                                <a href="http://127.0.0.1:8000/book-detail/${bookId}/" class="btn btn-primary">To book details</a>
                             </div>
                         </div>`
                     )
