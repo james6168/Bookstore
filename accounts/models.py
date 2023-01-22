@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-
+from book.models import Book
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
@@ -55,6 +55,8 @@ class AbstractEmailUser(AbstractBaseUser, PermissionsMixin):
 
 
 class User(AbstractEmailUser):
+
+    books = models.ManyToManyField(Book, blank=True)
 
     full_name = models.CharField(
         'Full name', max_length=255, blank=True

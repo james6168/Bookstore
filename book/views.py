@@ -28,3 +28,7 @@ class BookDetailAPIView(GenericAPIView):
 class BookList(TemplateView):
     template_name = "book_store.html"
 
+
+class BookDetail(TemplateView):
+    template_name = "book_detail.html"
+
