@@ -8,4 +8,5 @@ urlpatterns = [
     path('book-create/', BookCreateAPIView.as_view()),
     path('book-image-create/', BookImageCreateAPIView.as_view()),
     path('book-image-update/<int:pk>/', BookImageRetrieveUpdateDestroyAPIView.as_view()),
+    path('order-create/', OrderCreateApiView.as_view())
 ]

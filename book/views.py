@@ -41,7 +41,7 @@ class BookRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 
 class BookImageCreateAPIView(CreateAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = BookImageSerializer
+    serializer_class = AdditionalBookSerializer
     queryset = BookImage.objects.all()
 
     def create(self, request, *args, **kwargs):
@@ -55,19 +55,28 @@ class BookImageCreateAPIView(CreateAPIView):
 
 class BookCreateAPIView(CreateAPIView):
     permission_classes = [IsAuthenticated, ]
-    serializer_class = BookSerializer
+    serializer_class = AdditionalBookSerializer
     queryset = Book.objects.all()
 
+
+class OrderCreateApiView(CreateAPIView):
+    permission_classes = [IsAuthenticated, ]
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+
     def create(self, request, *args, **kwargs):
-        _mutable = request.data._mutable
-        request.data._mutable = True
         request.data["user"] = request.user.id
-        request.data._mutable = _mutable
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class OrderRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthorOrReadOnly, ]
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
 
 
 class BookList(TemplateView):
