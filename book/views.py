@@ -5,7 +5,7 @@ from book.permissions import *
 from book.serializers import *
 from book.models import Book
 from django.views.generic import TemplateView
-from book.paginations import BookListPagination
+from book.paginations import *
 from rest_framework.permissions import *
 from rest_framework import status
 
@@ -14,7 +14,13 @@ class BookListAPIView(ListAPIView):
     permission_classes = [IsAuthorOrReadOnly,]
     pagination_class = BookListPagination
     serializer_class = BookSerializer
-    queryset = Book.objects.all()
+
+    def get_queryset(self):
+        queryset = Book.objects.all()
+        book_name = self.request.query_params.get("book_name")
+        if book_name:
+            queryset = queryset.filter(name=book_name)
+        return queryset
 
 
 class BookDetailAPIView(GenericAPIView):
@@ -76,6 +82,13 @@ class OrderCreateApiView(CreateAPIView):
 class OrderRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthorOrReadOnly, ]
     serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+
+
+class OrderListAPIView(ListAPIView):
+    permission_classes = [IsAuthorOrReadOnly, ]
+    serializer_class = OrderSerializer
+    pagination_class = OrderListPagination
     queryset = Order.objects.all()
 
 
