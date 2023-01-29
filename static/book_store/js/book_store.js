@@ -13,7 +13,6 @@ $(document).ready(function () {
     } else {
         var nextPage = $(location).attr('href').replace(currentPage, `/${nextPageInt}/`)
     }
-    // var nextPage = $(location).attr('href').replace(currentPage, `/${nextPageInt}/`)
     var previousPageInt = parseInt(currentPage.substring(1, 2)) - 1
     var previousPage = $(location).attr('href').replace(currentPage, `/${previousPageInt}/`)
 
