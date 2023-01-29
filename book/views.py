@@ -41,7 +41,7 @@ class BookRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 
 class BookImageCreateAPIView(CreateAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = AdditionalBookSerializer
+    serializer_class = BookImageSerializer
     queryset = BookImage.objects.all()
 
     def create(self, request, *args, **kwargs):
